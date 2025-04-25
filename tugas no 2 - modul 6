@@ -1,0 +1,77 @@
+import 'dart:io';
+
+class Nasabah {
+  String nama;
+  String layanan;
+
+  Nasabah(this.nama, this.layanan);
+
+  @override
+  String toString() {
+    return 'Nama: $nama, Layanan: $layanan';
+  }
+}
+
+void main() {
+  stdout.write("Masukkan kapasitas antrian: ");
+  int kapasitas = int.parse(stdin.readLineSync()!);
+
+  List<Nasabah?> antrian = [];
+
+  while (true) {
+    // Menu pilihan
+    print("\n=== MENU ANTRIAN ===");
+    print("1. Tambah ke Antrian");
+    print("2. Layani Antrian");
+    print("3. Tampilkan Antrian");
+    print("4. Keluar");
+    stdout.write("Pilih menu (1-4): ");
+    String? pilihan = stdin.readLineSync();
+
+    switch (pilihan) {
+      case '1':
+        // Tambah data ke antrian
+        if (antrian.length >= kapasitas) {
+          print("Antrian penuh! Tidak bisa menambahkan data.");
+        } else {
+          stdout.write("Masukkan nama: ");
+          String nama = stdin.readLineSync()!;
+          stdout.write("Masukkan jenis layanan: ");
+          String layanan = stdin.readLineSync()!;
+          antrian.add(Nasabah(nama, layanan));
+          print("Data berhasil ditambahkan ke antrian.");
+        }
+        break;
+
+      case '2':
+        // Hapus (layani) data dari antrian
+        if (antrian.isEmpty) {
+          print("Antrian kosong! Tidak ada yang dilayani.");
+        } else {
+          Nasabah? keluar = antrian.removeAt(0)!;
+          print("Nasabah '${keluar.nama}' telah dilayani.");
+        }
+        break;
+
+      case '3':
+        // Tampilkan isi antrian
+        if (antrian.isEmpty) {
+          print("Antrian kosong!");
+        } else {
+          print("Isi antrian:");
+          for (int i = 0; i < antrian.length; i++) {
+            print("${i + 1}. ${antrian[i]}");
+          }
+        }
+        break;
+
+      case '4':
+        // Keluar dari program
+        print("Terima kasih! Program selesai.");
+        return;
+
+      default:
+        print("Pilihan tidak valid. Silakan coba lagi.");
+    }
+  }
+}
