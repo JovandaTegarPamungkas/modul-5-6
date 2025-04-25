@@ -1,0 +1,31 @@
+import 'dart:io';
+
+void main() {
+  print('=== Konversi Desimal ===');
+  stdout.write('Masukkan nilai desimal: ');
+  int desimal = int.parse(stdin.readLineSync()!);
+
+  String biner = desimal.toRadixString(2);
+  String oktal = desimal.toRadixString(8);
+  String heksa = desimal.toRadixString(16);
+
+  print('Hasil nilai biner = $biner');
+  print('Hasil nilai oktal = $oktal');
+  print('Hasil nilai heksadesimal = ${heksa.toUpperCase()}');
+
+  print('\n=== Cek Palindrom dan Membalik Kalimat ===');
+  stdout.write('Masukkan kalimat: ');
+  String kalimat = stdin.readLineSync()!;
+
+  String dibalik = kalimat.split('').reversed.join('');
+  print('Hasil = $dibalik');
+
+  String asli = kalimat.replaceAll(' ', '').toLowerCase();
+  String balik = dibalik.replaceAll(' ', '').toLowerCase();
+
+  if (asli == balik) {
+    print('Palindrom');
+  } else {
+    print('Bukan palindrom');
+  }
+}
